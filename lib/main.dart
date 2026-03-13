@@ -1,3 +1,4 @@
+import 'package:ablan_halleder_mobil/views/rol_sec/rol_sec_view.dart';
 import 'package:ablan_halleder_mobil/views/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashView(),
+        '/rol_sec': (context) => const RolSecView(),
       },
     );
   }
