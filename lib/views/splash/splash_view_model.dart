@@ -7,7 +7,6 @@ part 'splash_view_model.g.dart';
 class SplashViewModel = _SplashViewModelBase with _$SplashViewModel;
 
 abstract class _SplashViewModelBase with Store {
-
   void init(BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,

@@ -28,10 +28,8 @@ class _SplashViewState extends State<SplashView> {
           height: 100,
           color: Colors.green,
           alignment: Alignment.center,
-          child: Text(
-            "ICON"
-          ),
-        )
+          child: Text("ICON"),
+        ),
       ),
     );
   }

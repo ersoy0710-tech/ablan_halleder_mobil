@@ -5,26 +5,26 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:ablan_halleder_mobil/views/kayit_ol/kayit_ol_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ablan_halleder_mobil/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  late KayitOlViewModel vm;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  setUp(() {
+    vm = KayitOlViewModel();
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test("rol seçilirse kayıt yapılır", () {
+    vm.sifre = "1234";
+    vm.sifreTekrar = "1234";
+    vm.adSoyad = "vedat";
+    vm.telefon = "5551234567";
+
+    expect(() => vm.kayitOl(1), returnsNormally);
   });
 }
