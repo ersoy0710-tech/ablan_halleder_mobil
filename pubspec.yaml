@@ -21,6 +21,10 @@ dependencies:
   mobx: ^2.6.0
   mobx_codegen: ^2.7.6
 
+  dio: ^5.9.2
+
+  shared_preferences: ^2.5.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

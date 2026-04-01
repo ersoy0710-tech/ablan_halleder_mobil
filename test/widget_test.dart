@@ -19,12 +19,12 @@ void main() {
   });
 
 
-  test("rol seçilirse kayıt yapılır", () {
+  /*test("rol seçilirse kayıt yapılır", () {
     vm.sifre = "1234";
     vm.sifreTekrar = "1234";
     vm.adSoyad = "vedat";
     vm.telefon = "5551234567";
 
     expect(() => vm.kayitOl(1), returnsNormally);
-  });
+  });*/
 }

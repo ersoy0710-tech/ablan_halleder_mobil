@@ -1,19 +1,17 @@
-import 'package:ablan_halleder_mobil/enums/rol_enum.dart';
+import 'package:ablan_halleder_mobil/manager/locale_manager.dart';
+import 'package:ablan_halleder_mobil/model/user_model.dart';
 import 'package:ablan_halleder_mobil/service/dio_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
-part 'kayit_ol_view_model.g.dart';
+part 'giris_yap_view_model.g.dart';
 
-class KayitOlViewModel = _KayitOlViewModelBase with _$KayitOlViewModel;
+class GirisYapViewModel = _GirisYapViewModelBase with _$GirisYapViewModel;
 
-abstract class _KayitOlViewModelBase with Store {
-  TextEditingController adSoyadController = TextEditingController();
+abstract class _GirisYapViewModelBase with Store {
   TextEditingController emailController = TextEditingController();
-  TextEditingController telefonController = TextEditingController();
   TextEditingController sifreController = TextEditingController();
-  TextEditingController sifreTekrarController = TextEditingController();
 
   @observable
   bool? success;
@@ -23,29 +21,31 @@ abstract class _KayitOlViewModelBase with Store {
 
   final DioService _dio = DioService();
 
-  void init(BuildContext context) {}
+  void init() {}
 
   @action
-  Future<void> kayitOl(RolEnum secilenRol) async {
+  Future<void> girisYap(BuildContext context) async {
     try {
       if(!validate()) {
         return;
       }
 
       Response response = await _dio.dio.post(
-          "/kayit_ol",
+          "/giris_yap",
           data: {
-            "rol": secilenRol.name,
-            "adSoyad": adSoyadController.text,
             "email": emailController.text,
-            "telefon": telefonController.text,
             "sifre": sifreController.text,
           }
       );
 
       if(response.data["success"]) {
-        success = true;
-        message = "Kayıt başarılı. Lütfen giriş yapınız.";
+        final locale = LocaleManager();
+
+        final userModel = UserModel.fromJson(response.data["data"]);
+        await locale.saveString("user", userModel.toRawJson());
+
+        if (!context.mounted) return;
+        Navigator.pushNamedAndRemoveUntil(context, '/ana_sayfa', (route) => false);
       }
     }
     on DioException catch (error) {
@@ -56,22 +56,9 @@ abstract class _KayitOlViewModelBase with Store {
   }
 
   bool validate() {
-    if (adSoyadController.text.trim().isEmpty) {
-      message = "Kullanıcı adı boş bırakılamaz.";
-      success = false;
-      return false;
-    }
-
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(emailController.text)) {
       message = "Geçerli bir e-posta adresi giriniz.";
-      success = false;
-      return false;
-    }
-
-    final phoneRegex = RegExp(r'^(05|5)\d{9}$');
-    if (!phoneRegex.hasMatch(telefonController.text.replaceAll(' ', ''))) {
-      message = "Geçerli bir telefon giriniz.";
       success = false;
       return false;
     }
@@ -82,14 +69,9 @@ abstract class _KayitOlViewModelBase with Store {
       return false;
     }
 
-    if (sifreController.text != sifreTekrarController.text) {
-      message = "Şifreler eşleşmiyor!";
-      success = false;
-      return false;
-    }
-
     return true;
   }
+
 
   double dynamicWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;

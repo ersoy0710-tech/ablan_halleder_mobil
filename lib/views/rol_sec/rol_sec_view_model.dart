@@ -1,3 +1,4 @@
+import 'package:ablan_halleder_mobil/enums/rol_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -7,12 +8,12 @@ class RolSecViewModel = _RolSecViewModelBase with _$RolSecViewModel;
 
 abstract class _RolSecViewModelBase with Store {
   // 0: Hizmet almak, 1: Hizmet vermek
-  int secilenRol = -1;
+  RolEnum? secilenRol;
 
   void init() {}
 
   void goKayitOl(BuildContext context) {
-    if(secilenRol == -1) {
+    if(secilenRol == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.red,
@@ -22,6 +23,10 @@ abstract class _RolSecViewModelBase with Store {
       return;
     }
     Navigator.pushNamed(context, '/kayit_ol', arguments: secilenRol);
+  }
+
+  void goGirisYap(BuildContext context) {
+    Navigator.pushNamed(context, '/giris_yap');
   }
 
   double dynamicWidth(BuildContext context) {

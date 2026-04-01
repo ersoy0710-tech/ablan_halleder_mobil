@@ -1,0 +1,4 @@
+enum RolEnum {
+  customer,
+  cleaner
+}

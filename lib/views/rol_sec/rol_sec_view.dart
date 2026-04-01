@@ -1,3 +1,4 @@
+import 'package:ablan_halleder_mobil/enums/rol_enum.dart';
 import 'package:ablan_halleder_mobil/views/rol_sec/rol_sec_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,7 @@ class _RolSecViewState extends State<RolSecView> {
                   const SizedBox(height: 40),
 
                   roleCard(
-                    index: 0,
+                    rolEnum: RolEnum.customer,
                     title: "Hizmet Almak İstiyorum",
                     desc: "Ev temizliği talebi oluştur, takip et.",
                     icon: Icons.home,
@@ -65,7 +66,7 @@ class _RolSecViewState extends State<RolSecView> {
                   ),
 
                   roleCard(
-                    index: 1,
+                    rolEnum: RolEnum.cleaner,
                     title: "Hizmet Vermek İstiyorum",
                     desc: "Uygun işleri gör, kabul et, tamamla.",
                     icon: Icons.person,
@@ -96,14 +97,17 @@ class _RolSecViewState extends State<RolSecView> {
 
                   const SizedBox(height: 20),
 
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Zaten hesabınız var mı? "),
-                      Text(
-                        "Giriş Yap",
-                        style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
-                      ),
+                      GestureDetector(
+                        onTap: () => viewModel.goGirisYap(context),
+                        child: Text(
+                          "Giriş Yap",
+                          style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
+                        ),
+                      )
                     ],
                   ),
                 ],
@@ -116,18 +120,18 @@ class _RolSecViewState extends State<RolSecView> {
   }
 
   Widget roleCard({
-    required int index,
+    required RolEnum rolEnum,
     required String title,
     required String desc,
     required IconData icon,
     required RolSecViewModel viewModel,
   }) {
-    bool isSelected = viewModel.secilenRol == index;
+    bool isSelected = viewModel.secilenRol == rolEnum;
 
     return GestureDetector(
       onTap: () {
         setState(() {
-          viewModel.secilenRol = index;
+          viewModel.secilenRol = rolEnum;
         });
       },
       child: Container(
