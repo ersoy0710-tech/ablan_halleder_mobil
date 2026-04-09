@@ -2,7 +2,11 @@
   <dictionary name="project">
     <words>
       <w>Kayit</w>
+      <w>Olustur</w>
+      <w>Talep</w>
       <w>kayit</w>
+      <w>olustur</w>
+      <w>talep</w>
     </words>
   </dictionary>
 </component>
