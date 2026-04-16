@@ -1,5 +1,6 @@
 import 'package:ablan_halleder_mobil/manager/locale_manager.dart';
 import 'package:ablan_halleder_mobil/views/ana_sayfa/ana_sayfa_view.dart';
+import 'package:ablan_halleder_mobil/views/base/base_view.dart';
 import 'package:ablan_halleder_mobil/views/rol_sec/rol_sec_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -20,18 +21,10 @@ abstract class _SplashViewModelBase with Store {
     if (!context.mounted) return;
 
     if (userString == null) {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const RolSecView()),
-            (route) => false,
-      );
+      Navigator.pushNamedAndRemoveUntil(context, '/rol_sec', (route) => false);
     }
     else {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const AnaSayfaView()),
-            (route) => false,
-      );
+      Navigator.pushNamedAndRemoveUntil(context, '/base', (route) => false);
     }
   }
 

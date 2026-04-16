@@ -45,7 +45,7 @@ abstract class _GirisYapViewModelBase with Store {
         await locale.saveString("user", userModel.toRawJson());
 
         if (!context.mounted) return;
-        Navigator.pushNamedAndRemoveUntil(context, '/ana_sayfa', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/base', (route) => false);
       }
     }
     on DioException catch (error) {

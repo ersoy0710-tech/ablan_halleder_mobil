@@ -14,52 +14,21 @@ class _AnaSayfaViewState extends State<AnaSayfaView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: _buildAppBar(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSectionTitle("Aktif Talebim"),
-            const SizedBox(height: 12),
-            _buildActiveRequestCard(),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionTitle("Aktif Talebim"),
+          const SizedBox(height: 12),
+          _buildActiveRequestCard(),
 
-            const SizedBox(height: 16),
+          const SizedBox(height: 16),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildSectionTitle("Son Talepler"),
-                TextButton(
-                  onPressed: () {},
-                  child: Text("Tümünü Gör", style: TextStyle(color: primaryTurquoise, fontWeight: FontWeight.bold)),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-          ],
-        ),
+          _buildSectionTitle("Son Talepler"),
+          const SizedBox(height: 12),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/talep_olustur');
-        },
-        backgroundColor: primaryTurquoise,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.add, color: Colors.white, size: 30),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: _buildBottomAppBar(),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: Text("Ana Sayfa", style: TextStyle(color: darkBlue, fontWeight: FontWeight.bold))
     );
   }
 
@@ -116,46 +85,6 @@ class _AnaSayfaViewState extends State<AnaSayfaView> {
             ),
           ),
           const Icon(Icons.chevron_right, color: Colors.grey),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomAppBar() {
-    return BottomAppBar(
-      color: Colors.white,
-      surfaceTintColor: Colors.white,
-      shape: const CircularNotchedRectangle(),
-      padding: EdgeInsets.zero,
-      notchMargin: 8,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(color: Colors.grey.shade100)
-          )
-        ),
-        height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildNavItem(Icons.home_filled, "Ana Sayfa", true),
-            _buildNavItem(Icons.assignment_outlined, "Taleplerim", false),
-            const SizedBox(width: 40),
-            _buildNavItem(Icons.chat_bubble_outline, "Mesajlar", false),
-            _buildNavItem(Icons.person_outline, "Profil", false),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, String label, bool isSelected) {
-    return Expanded(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: isSelected ? primaryTurquoise : Colors.grey),
-          Text(label, style: TextStyle(fontSize: 10, color: isSelected ? primaryTurquoise : Colors.grey)),
         ],
       ),
     );

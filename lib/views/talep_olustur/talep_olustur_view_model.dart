@@ -93,6 +93,9 @@ abstract class _TalepOlusturViewModelBase with Store {
         success = true;
         message = "Talep oluşturuldu.";
       }
+      else {
+        throw Exception();
+      }
     }
     on DioException catch (error) {
       Response response = await _dio.dioError(error);

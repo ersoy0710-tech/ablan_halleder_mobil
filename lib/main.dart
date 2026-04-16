@@ -1,4 +1,6 @@
-import 'package:ablan_halleder_mobil/views/ana_sayfa/ana_sayfa_view.dart';
+import 'package:ablan_halleder_mobil/views/adres_ekle_view/adres_ekle_view.dart';
+import 'package:ablan_halleder_mobil/views/adreslerim/adreslerim_view.dart';
+import 'package:ablan_halleder_mobil/views/base/base_view.dart';
 import 'package:ablan_halleder_mobil/views/giris_yap/giris_yap_view.dart';
 import 'package:ablan_halleder_mobil/views/kayit_ol/kayit_ol_view.dart';
 import 'package:ablan_halleder_mobil/views/rol_sec/rol_sec_view.dart';
@@ -24,8 +26,10 @@ class MyApp extends StatelessWidget {
         '/rol_sec': (context) => const RolSecView(),
         '/kayit_ol': (context) => const KayitOlView(),
         '/giris_yap': (context) => const GirisYapView(),
-        '/ana_sayfa': (context) => const AnaSayfaView(),
+        '/base': (context) => const BaseView(),
         '/talep_olustur': (context) => const TalepOlusturView(),
+        '/adreslerim': (context) => const AdreslerimView(),
+        '/adres_ekle': (context) => const AdresEkleView(),
       },
     );
   }
